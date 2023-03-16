@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 export function Navbar() {
   return (
-    <nav className=" navbar navbar-expand-md bg-danger text-light navbar-dark">
+    <nav className=" navbar navbar-expand-md bg-primary text-light navbar-dark">
       <div className="container">
-        <span>URL SHORTNER</span>
+        <span>Forgot Validation</span>
         <button
           className="navbar-toggler"
           data-bs-toggle="collapse"
