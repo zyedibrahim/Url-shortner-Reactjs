@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { AdminNavbar } from "./Adminnavbar";
 import { API } from "./global";
+import { AdminNavbar } from "./AdminNavbar";
 
 export function AllLink() {
   const [getdata, setdata] = useState();
@@ -16,6 +16,8 @@ export function AllLink() {
       .then((data) => {
         setdata(data);
       });
+
+    if (!localStorage.getItem("token")) window.location.href = "/";
   }
 
   useEffect(() => {

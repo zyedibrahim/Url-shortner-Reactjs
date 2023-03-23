@@ -1,11 +1,11 @@
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { API } from "./global";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
+
 import * as yup from "yup";
-import { Navbar } from "./Navbar";
 
 const formvalidationschema = yup.object({
   username: yup.string().required("This is fiels is required"),
@@ -18,16 +18,46 @@ const formvalidationschema = yup.object({
 export function Home() {
   return (
     <div>
-      <Navbar />
+      <nav className=" navbar navbar-expand-md bg-primary text-light navbar-dark">
+        <div className="container">
+          <span>URL SHORTNER</span>
+          <button
+            className="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#mynav"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className=" navbar-collapse " id="mynav">
+            <ul className="navbar-nav ms-auto ">
+              <li className="nav-item active ">
+                <Link to={"/"} className="nav-link">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item  ">
+                <Link to={"/signup"} className="nav-link">
+                  Signup
+                </Link>
+              </li>
+              <li className="nav-item ">
+                <Link to={"/login"} className="nav-link">
+                  Login
+                </Link>{" "}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
       <div
-        class="alert alert-danger alert-dismissible text-center fade show"
+        className="alert alert-danger alert-dismissible text-center fade show"
         role="alert"
       >
         <strong>Note This Carfully</strong> You should check in on some of those
         Forgot validation and Signup to And Login Also
         <button
           type="button"
-          class="btn-close"
+          className="btn-close"
           data-bs-dismiss="alert"
           aria-label="Close"
         ></button>
@@ -53,6 +83,7 @@ function Login() {
         Logincheck(data);
       },
     });
+  const navigate = useNavigate();
 
   async function Logincheck(val) {
     const data = await fetch(`${API}/users/login`, {
@@ -68,12 +99,17 @@ function Login() {
     if (result.message === "login success") {
       localStorage.setItem("token", result.token);
       successnotify(result.message);
+
+      setTimeout(() => {
+        navigate("/Alllink");
+      }, 3000);
     } else {
       errornotify(result.message);
     }
 
     console.log(result.message);
   }
+
   const [check, setcheck] = useState("false");
   return (
     <div>

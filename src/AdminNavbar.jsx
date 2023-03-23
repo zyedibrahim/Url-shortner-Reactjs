@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 
-export function Navbar() {
+export function AdminNavbar() {
+  function logout() {
+    localStorage.clear();
+    window.location.href = "/";
+  }
+
   return (
     <nav className=" navbar navbar-expand-md bg-primary text-light navbar-dark">
       <div className="container">
@@ -25,8 +30,8 @@ export function Navbar() {
               </Link>
             </li>
             <li className="nav-item ">
-              <Link to={"/login"} className="nav-link">
-                Login
+              <Link onClick={() => logout()} className="nav-link">
+                Logout
               </Link>{" "}
             </li>
           </ul>
